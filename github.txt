@@ -1,0 +1,340 @@
+Index.html
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Work Schedule Planner</title> 
+<link rel="stylesheet" href="styles.css"> 
+</head> 
+<body> 
+<header> 
+<h1>Work Schedule Planner</h1> 
+</header> 
+<main> 
+<section> 
+<h2>Select Your Category</h2> 
+<form id="schedule-form"> 
+<label for="category">I am a:</label> 
+<select id="category" name="category" required> 
+<option value="" disabled selected>Select an option</option> 
+<option value="school">School Student</option> 
+<option value="college">College Student</option> 
+<option value="teacher">Teacher</option> 
+<option value="doctor">Doctor</option> 
+<option value="housewife">Housewife</option> 
+<option value="business">Business Person</option> 
+<option value="corporate">Corporate Employee</option> 
+<option value="police">Police Officer</option> 
+</select> 
+ 
+<h3>Work Timings</h3> 
+<label for="work-start">Work Start Time:</label> 
+<input type="time" id="work-start" name="work-start" required> 
+<label for="work-end">Work End Time:</label> 
+<input type="time" id="work-end" name="work-end" required> 
+<button type="submit">Generate Schedule</button> 
+</form> 
+</section> 
+<section id="schedule-output" class="hidden"> 
+<h2>Your Personalized Schedule</h2> 
+<ul id="schedule-list"></ul> 
+</section> 
+</main> 
+<script src="script.js"></script> 
+</body> 
+</html 
+
+Styles.css
+body { 
+font-family:'Roboto',sans-serif;     margin: 0;
+padding: 0; 
+background: linear-gradient(135deg, #ffb6b9, #ff6f61
+color: #333;     
+min-height: 100vh;     
+display: flex;     
+flex-direction: column; 
+align-items: center;     
+justify-content: flex-start; 
+  } 
+.container {    
+width: 90%;     
+max-width:850px;     background:#ffffff;     border-radius: 15px; 
+box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);    
+padding: 30px 40px;     
+margin-bottom: 20px; 
+animation: fadeIn 0.8s ease-in-out;     
+background-color: #ffffff; 
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
+} 
+header { 
+background: linear-gradient(135deg, #ff6f61, #ffb6b9);  
+color: #ffffff;     
+width: 100%;     
+padding: 20px 0;    
+text-align: center; 
+box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);     border-bottom: 5px solid } 
+header h1 {     
+font-size: 2.5rem;    margin: 0; 
+text-transform: uppercase; 
+letter-spacing: 2px;    
+font-weight: bold; 
+  } 
+form {     
+display: flex;    
+ flex-direction:column;     
+gap: 15px; 
+} 
+   
+label {     
+font-size: 1rem;    
+font-weight:bold;     color: #555; 
+ } 
+   
+  select,input[type="time"]{     padding: 12px;     
+font-size: 1rem;    
+border-radius: 8px;     
+border:1pxsolid#f3a6a0;     outline: none;     
+transition:all0.3sease;     background-color: #ffe6e0; 
+ } 
+   
+select:focus,input[type="time"]:focus{    
+border-color: #ff6f61; 
+box-shadow: 0 0 8px rgba(255, 111, 97, 0.3); 
+} 
+   
+button{     
+background: #ff6f61;     
+color: #ffffff;     
+border: none;     
+padding: 12px 20px;     
+font-size: 1rem;     
+border-radius: 8px;     
+cursor: pointer;     
+font-weight: bold; 
+transition: background 0.3s ease, box-shadow 0.3s ease; 
+} 
+   
+button:hover{     
+background: #f16d60; 
+box-shadow: 0 4px 10px rgba(255, 111, 97, 0.3); 
+  } 
+#schedule-output h2 {     
+font-size: 1.5rem;     
+text-align: center;     
+margin-bottom: 15px;     
+font-weight: bold;     
+color: #333; 
+ } 
+   
+ul {     
+list-style:none;     padding:0;     margin: 0; 
+} 
+   
+ul li {     
+display: flex;     
+align-items: center;     
+justify-content: 
+space-between;     
+padding: 12px;     
+margin: 10px 0;     
+background: #f9f3f3;     
+border-radius: 10px; 
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);     
+font-size: 1rem;     
+color: #333; 
+transition: box-shadow 0.3s ease, transform 0.3s ease; 
+  } 
+   
+ul li:hover {     
+background: #ffd2d0; 
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);     
+transform: translateY(-2px); 
+} 
+   
+ul li input[type="checkbox"] {     margin-right: 10px;     
+transform: scale(1.2);     
+cursor: pointer;     
+accent-color: #ff6f61; 
+ } 
+   
+footer {     
+margin-top: 20px; 
+text-align: center; 
+font-size:0.9rem;     color: #777; 
+  } 
+   
+@media (max-width: 600px) {          header h1 {      
+font-size: 2rem; 
+ } 
+   
+.container {       
+padding: 20px; 
+} 
+   
+button {       
+font-size: 0.9rem; 
+} 
+ul li { 
+font-size: 0.9rem; 
+} 
+} 
+   
+@keyframes fadeIn {     
+from {       
+opacity: 0;       
+transform: translateY(20px); 
+}    
+to {       
+opacity: 1;       
+transform: translateY(0);     
+}
+} 
+ script.js
+document.getElementById('schedule-form').addEventListener('submit', function (event) { 
+event.preventDefault(); 
+const category = document.getElementById('category').value;     
+const workStart = document.getElementById('work-start').value;     
+const workEnd = document.getElementById('work-end').value;       
+const morningStart = "06:00";     const nightEnd = "21:00"; 
+if (!category || !workStart || !workEnd || workStart < morningStart || workEnd > nightEnd || workStart >= workEnd) { 
+alert('Please ensure all fields are filled correctly and work timings are between 6:00 
+AM and 9:00 PM.'); 
+return; 
+} 
+const schedule = generateSchedule(category, workStart, workEnd);       
+const scheduleOutput = document.getElementById('schedule-output');     
+const scheduleList=document.getElementById('schedule-list');     
+schedule.forEach((task) => { 
+const listItem = document.createElement('li');      
+listItem.innerHTML = ` 
+<input type="checkbox" id="${task.replace(/\s/g, '')}" />         
+<label for="${task.replace(/\s/g, '')}">${task}</label> `; 
+scheduleList.appendChild(listItem); 
+}); 
+scheduleOutput.classList.remove('hidden'); 
+ }); 
+ function generateSchedule(category, workStart, workEnd) {    
+ const schedule = [];     
+const morningStart = '06:30'; 
+const morningRoutines = getMorningRoutines(category);     
+schedule.push(...morningRoutines); 
+schedule.push(`${workStart} - ${workEnd}: ${getWorkDescription(category)}`);     
+const eveningRoutines = getEveningRoutines(category, workEnd);     
+schedule.push(...eveningRoutines);
+return schedule; 
+  } 
+function getMorningRoutines(category) {     const routines = {       school: [ 
+'06:30 - 07:00: Wake up and get ready for school', 
+'07:00 - 07:30: Review homework or study', 
+'07:30 - 08:00: Have breakfast', 
+], 
+college: [ 
+'06:30 - 07:00: Wake up and get ready for the day', 
+'07:00 - 07:30: Plan the day’s assignments or classes', 
+'07:30 - 08:00: Have breakfast', 
+], 
+teacher: [ 
+'06:30 - 07:00: Wake up and prepare for classes', 
+'07:00 - 07:30: Review lesson plans', 
+'07:30 - 08:00: Have breakfast', 
+], 
+doctor: [ 
+'06:30 - 07:00: Wake up and prepare for the day', 
+'07:00 - 07:30: Review patient schedule or notes', 
+'07:30 - 08:00: Have a healthy breakfast', 
+], 
+housewife: [ 
+'06:30 - 07:00: Wake up and plan household tasks', 
+'07:00 - 07:30: Prepare breakfast for the family', 
+'07:30 - 08:00: Family time or light exercise', 
+], 
+business: [ 
+'06:30 - 07:00: Wake up and review business goals', 
+'07:00 - 07:30: Plan meetings and tasks', 
+'07:30 - 08:00: Have a quick breakfast', 
+], 
+corporate: [ 
+'06:30 - 07:00: Wake up and prepare for office', 
+'07:00 - 07:30: Review work tasks or emails', 
+'07:30 - 08:00: Have breakfast', 
+], 
+police: [ 
+'06:30 - 07:00: Wake up and prepare for duty', 
+'07:00 - 07:30: Check reports or schedules', 
+'07:30 - 08:00: Have breakfast', 
+],};
+return 
+}   
+function getEveningRoutines(category, workEnd) { 
+const hobbyStart = calculateEndTime(workEnd, 30); 
+const routines = {       school: [ 
+`${hobbyStart} - 19:00: Play or pursue a hobby`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Study or complete homework', 
+'20:30 - 21:00: Relax and prepare for bed', 
+], 
+college: [ 
+`${hobbyStart} - 19:00: Relax or work on a personal project`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Study or group discussions', 
+'20:30 - 21:00: Relax and prepare for bed', 
+], 
+teacher: [ 
+`${hobbyStart} - 19:00: Review or prepare lesson plans`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Spend time with family or relax', 
+'20:30 - 21:00: Prepare for the next day and unwind', 
+], 
+doctor: [ 
+`${hobbyStart} - 19:00: Catch up on medical journals or relax`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Spend time with family', 
+'20:30 - 21:00: Plan next day’s schedule and unwind', 
+], 
+housewife: [ 
+`${hobbyStart} - 19:00: Family time or a hobby`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Organize and plan next day’s tasks', 
+'20:30 - 21:00: Relax before bed', 
+], 
+business: [ 
+`${hobbyStart} - 19:00: Review daily performance or relax`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Plan next day’s strategy', 
+'20:30 - 21:00: Unwind and prepare for bed', 
+], 
+corporate: [ 
+`${hobbyStart} - 19:00: Relax or work on personal development`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Plan or organize tasks for the next day', 
+'20:30 - 21:00: Relax and prepare for bed', 
+], 
+police: [ 
+`${hobbyStart} - 19:00: Spend time with family or relax`, 
+'19:00 - 19:30: Dinner', 
+'19:30 - 20:30: Check reports or plan duties', 
+'20:30 - 21:00: Relax and prepare for bed', 
+], 
+}; 
+return routines[category] || []; 
+} 
+function calculateEndTime(start, duration) {
+const [hours, minutes] = start.split(':').map(Number); 
+const totalMinutes = hours * 60 + minutes + duration;     const endHours = Math.floor(totalMinutes / 60);     const endMinutes = totalMinutes % 60; 
+return 
+`${String(endHours).padStart(2,'0')}:${String(endMinutes).padSr(2, '0')}`; 
+  } 
+function getWorkDescription(category) {     
+const descriptions = { 
+school: 'Attend school and complete homework',       
+college: 'Attend classes, study, and work on projects',       
+teacher: 'Teach and prepare lessons', 
+doctor: 'Attend patients and manage medical tasks',       
+housewife: 'Manage household and family tasks',       
+business: 'Handle business operations and meetings',       
+corporate: 'Work on projects and attend meetings',       
+police: 'Maintain law and order and administrative tasks', 
+}; 
+return descriptions[category] || 'Work'; 
+} 
